@@ -23,7 +23,7 @@ const Teams = () => {
       header: 'NAME', 
       accessor: 'name', 
       render: (item) => (
-        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/jira/teams/edit/${item.id}`)}>
+        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/teams/edit/${item.id}`)}>
           {item.name}
         </span>
       )
@@ -50,8 +50,8 @@ const Teams = () => {
       subtitle=""
       columns={columns}
       data={teams}
-      onAdd={() => navigate('/jira/teams/add')}
-      onEdit={(item) => navigate(`/jira/teams/edit/${item.id}`)}
+      onAdd={() => navigate('/teams/add')}
+      onEdit={(item) => navigate(`/teams/edit/${item.id}`)}
       onDelete={(item) => {
         if (window.confirm('Are you sure you want to delete this team?')) {
           const newTeams = teams.filter(t => t.id !== item.id);

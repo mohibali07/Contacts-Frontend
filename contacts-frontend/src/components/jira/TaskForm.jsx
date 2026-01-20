@@ -98,7 +98,7 @@ const TaskForm = () => {
 
     // Handle Redirection
     if (redirectMode === 'list') {
-      navigate('/jira/tasks');
+      navigate('/tasks');
     } else if (redirectMode === 'add_another') {
       setFormData({
         title: '',
@@ -113,11 +113,11 @@ const TaskForm = () => {
         updated_at: new Date().toISOString()
       });
       if (isEdit) {
-        navigate('/jira/tasks/add');
+        navigate('/tasks/add');
       }
     } else if (redirectMode === 'continue') {
       if (!isEdit && newId) {
-        navigate(`/jira/tasks/edit/${newId}`, { replace: true });
+        navigate(`/tasks/edit/${newId}`, { replace: true });
       }
     }
   };
@@ -135,7 +135,7 @@ const TaskForm = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
-              onClick={() => navigate('/jira/tasks')}
+              onClick={() => navigate('/tasks')}
               className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />

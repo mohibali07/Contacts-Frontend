@@ -29,7 +29,7 @@ const Users = () => {
       header: 'USERNAME', 
       accessor: 'username', 
       render: (item) => (
-        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/jira/users/edit/${item.id}`)}>
+        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/users/edit/${item.id}`)}>
           {item.username}
         </span>
       )
@@ -171,8 +171,8 @@ const Users = () => {
       subtitle=""
       columns={columns}
       data={filteredData}
-      onAdd={() => navigate('/jira/users/add')}
-      onEdit={(item) => navigate(`/jira/users/edit/${item.id}`)}
+      onAdd={() => navigate('/users/add')}
+      onEdit={(item) => navigate(`/users/edit/${item.id}`)}
       onDelete={(item) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
           const newUsers = users.filter(u => u.id !== item.id);

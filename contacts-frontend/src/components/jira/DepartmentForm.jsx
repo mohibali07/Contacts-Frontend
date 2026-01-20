@@ -89,7 +89,7 @@ const DepartmentForm = () => {
 
     // Handle Redirection
     if (redirectMode === 'list') {
-      navigate('/jira/departments');
+      navigate('/departments');
     } else if (redirectMode === 'add_another') {
       // Reset form for new entry
       setFormData({
@@ -98,13 +98,13 @@ const DepartmentForm = () => {
         parent: '' // Or keep the parent? Usually reset is better unless requested otherwise.
       });
       if (isEdit) {
-        navigate('/jira/departments/add');
+        navigate('/departments/add');
       }
       // If already in add mode, just clearing state is enough, but we might want to show a success toast in future
     } else if (redirectMode === 'continue') {
       if (!isEdit && newId) {
         // If we just created a new one, navigate to its edit page
-        navigate(`/jira/departments/edit/${newId}`, { replace: true });
+        navigate(`/departments/edit/${newId}`, { replace: true });
       }
       // If already editing, do nothing (just saved)
     }
@@ -135,27 +135,11 @@ const DepartmentForm = () => {
     if (!formData.parent) return;
     const parentDept = allDepartments.find(d => d.name === formData.parent);
     if (parentDept) {
-      navigate(`/jira/departments/edit/${parentDept.id}`);
+      navigate(`/departments/edit/${parentDept.id}`);
     } else {
       alert('Parent department record not found.');
     }
   };
-
-  const handleDeleteParent = () => {
-    if (!formData.parent) return;
-    if (window.confirm(`Are you sure you want to delete the parent department "${formData.parent}"? This will also update all departments that have this as a parent.`)) {
-      const parentName = formData.parent;
-      let updatedDepartments = allDepartments.filter(d => d.name !== parentName);
-      updatedDepartments = updatedDepartments.map(d => 
-        d.parent === parentName ? { ...d, parent: '-' } : d
-      );
-      localStorage.setItem('jira_departments', JSON.stringify(updatedDepartments));
-      setAllDepartments(updatedDepartments);
-      setParentOptions([...new Set(updatedDepartments.map(d => d.name))]);
-      setFormData(prev => ({ ...prev, parent: '' }));
-    }
-  };
-
   const handleModalSubmit = (e) => {
     e.preventDefault();
     if (!parentFormName.trim()) return;
@@ -208,7 +192,7 @@ const DepartmentForm = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
-              onClick={() => navigate('/jira/departments')}
+              onClick={() => navigate('/departments')}
               className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />

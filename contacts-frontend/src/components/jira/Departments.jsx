@@ -110,8 +110,8 @@ const Departments = () => {
       subtitle="Manage your organization's department structure and hierarchy."
       columns={columns}
       data={filteredData}
-      onAdd={() => navigate('/jira/departments/add')}
-      onEdit={(item) => navigate(`/jira/departments/edit/${item.id}`)}
+      onAdd={() => navigate('/departments/add')}
+      onEdit={(item) => navigate(`/departments/edit/${item.id}`)}
       onDelete={(item) => {
         if (window.confirm('Are you sure you want to delete this department?')) {
           const newDepts = departments.filter(d => d.id !== item.id);

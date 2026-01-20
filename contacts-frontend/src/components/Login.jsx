@@ -11,7 +11,7 @@ const Login = () => {
     e.preventDefault();
     if (email && password) {
       localStorage.setItem('isAuthenticated', 'true');
-      navigate('/contacts');
+      navigate('/dashboard');
     }
   };
 

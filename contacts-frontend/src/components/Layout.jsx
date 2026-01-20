@@ -1,121 +1,205 @@
 import React, { useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { 
-  LogOut, LayoutDashboard, Settings, 
-  Briefcase, ChevronDown, ChevronRight,
-  Users, Layers, CheckSquare, FileText, Shield
+  LayoutDashboard, 
+  Users, 
+  Settings, 
+  LogOut, 
+  Menu, 
+  X, 
+  Briefcase, 
+  CheckSquare, 
+  FileText, 
+  UserCheck, 
+  Building2, 
+  Search,
+  Bell,
+  HelpCircle,
+  ChevronRight,
+  Plus,
+  BarChart2
 } from 'lucide-react';
 
-const NavItem = ({ to, icon: Icon, label }) => (
-  <NavLink
-    to={to}
-    className={({ isActive }) =>
-      `group flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-200 ${
-        isActive
-          ? 'bg-gray-900 text-white shadow-lg shadow-gray-200'
-          : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
-      }`
-    }
+const SidebarItem = ({ icon: Icon, label, path, active, onClick, hasSubmenu }) => (
+  <button
+    onClick={onClick}
+    className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-all text-base font-medium mb-0.5
+      ${active 
+        ? 'bg-blue-50 text-blue-700' 
+        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+      }`}
   >
-    <div className="flex items-center gap-3.5">
-      <Icon className="h-5 w-5" />
-      <span className="font-medium text-sm">{label}</span>
-    </div>
-  </NavLink>
+    <Icon className={`h-5 w-5 ${active ? 'text-blue-600' : 'text-slate-400'}`} />
+    <span className="flex-1 text-left">{label}</span>
+  </button>
 );
 
-const NavGroup = ({ icon: Icon, label, children, defaultOpen = false }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  
-  return (
-    <div className="space-y-1">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-4 py-3.5 text-gray-500 hover:text-gray-900 transition-colors"
-      >
-        <div className="flex items-center gap-3.5">
-          <Icon className="h-5 w-5" />
-          <span className="font-medium text-sm">{label}</span>
-        </div>
-        {isOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-      </button>
-      
-      {isOpen && (
-        <div className="pl-4 space-y-1">
-          {children}
-        </div>
-      )}
+const SidebarGroup = ({ title, children }) => (
+  <div className="mb-6">
+    {title && (
+      <h3 className="px-3 mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider flex justify-between items-center group cursor-pointer hover:text-slate-600">
+        {title}
+        <Plus className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+      </h3>
+    )}
+    <div className="space-y-0.5">
+      {children}
     </div>
-  );
-};
+  </div>
+);
 
 const Layout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     navigate('/');
   };
 
+  const isActive = (path) => location.pathname.startsWith(path);
+
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-white flex font-sans text-slate-800">
+      
       {/* Sidebar */}
-      <aside className="w-72 bg-white border-r border-gray-100 hidden md:flex flex-col p-6 overflow-y-auto">
-        <div className="mb-8 px-2">
-          <h1 className="text-xl font-bold text-gray-900 flex items-center gap-3">
-            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-white text-sm font-bold">iF</div>
-            iFinance
-          </h1>
+      <aside 
+        className={`
+          fixed inset-y-0 left-0 z-50 w-64 bg-slate-50 border-r border-slate-200 transform transition-transform duration-200 ease-in-out
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+          md:relative md:translate-x-0
+        `}
+      >
+        {/* Sidebar Header */}
+        <div className="h-14 flex items-center px-4 border-b border-slate-200/50">
+          <div className="flex items-center gap-2">
+            <div className="h-6 w-6 bg-slate-900 rounded-md flex items-center justify-center">
+              <span className="text-white font-bold text-xs">i</span>
+            </div>
+            <span className="font-bold text-slate-900 text-sm">i finance</span>
+            <ChevronRight className="h-3 w-3 text-slate-400 ml-auto" />
+          </div>
+          <button 
+            className="md:hidden ml-auto text-slate-500"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
-        <nav className="flex-1 space-y-6">
-          <div className="space-y-1">
-            <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Main</p>
-            <NavItem to="/dashboard" icon={LayoutDashboard} label="Dashboard" />
-          </div>
+        {/* Sidebar Content */}
+        <div className="p-3 overflow-y-auto h-[calc(100vh-3.5rem)]">
+          
+          <SidebarGroup>
+            <SidebarItem icon={LayoutDashboard} label="Dashboard" path="/dashboard" active={isActive('/dashboard')} onClick={() => navigate('/dashboard')} />
+            <SidebarItem icon={Building2} label="Departments" path="/departments" active={isActive('/departments')} onClick={() => navigate('/departments')} />
+            <SidebarItem icon={UserCheck} label="Roles" path="/roles" active={isActive('/roles')} onClick={() => navigate('/roles')} />
+            <SidebarItem icon={Users} label="Users" path="/users" active={isActive('/users')} onClick={() => navigate('/users')} />
+            <SidebarItem icon={Users} label="Teams" path="/teams" active={isActive('/teams')} onClick={() => navigate('/teams')} />
+            <SidebarItem icon={CheckSquare} label="Tasks" path="/tasks" active={isActive('/tasks')} onClick={() => navigate('/tasks')} />
+            <SidebarItem icon={FileText} label="Submissions" path="/task-submissions" active={isActive('/task-submissions')} onClick={() => navigate('/task-submissions')} />
+          </SidebarGroup>
 
-          <div className="space-y-1">
-            <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Jira Module</p>
-            
-            <NavGroup icon={Briefcase} label="Project Management" defaultOpen={true}>
-              <NavItem to="/jira/departments" icon={Layers} label="Departments" />
-              <NavItem to="/jira/roles" icon={Shield} label="Roles" />
-              <NavItem to="/jira/task-submissions" icon={FileText} label="Task Submissions" />
-              <NavItem to="/jira/tasks" icon={CheckSquare} label="Tasks" />
-              <NavItem to="/jira/teams" icon={Users} label="Teams" />
-              <NavItem to="/jira/users" icon={Users} label="Users" />
-            </NavGroup>
-          </div>
+          <SidebarGroup title="Settings">
+            <SidebarItem icon={Settings} label="Settings" path="/settings" active={isActive('/settings')} onClick={() => navigate('/settings')} />
+            <SidebarItem icon={LogOut} label="Logout" path="/logout" onClick={handleLogout} />
+          </SidebarGroup>
 
-          <div className="space-y-1">
-            <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">System</p>
-            <NavItem to="/settings" icon={Settings} label="Settings" />
-          </div>
-        </nav>
-
-        <div className="pt-6 border-t border-gray-100 mt-6">
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3.5 px-4 py-3.5 w-full text-left text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-2xl transition-all duration-200"
-          >
-            <LogOut className="h-5 w-5" />
-            <span className="font-medium text-sm">Sign Out</span>
-          </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 p-4 md:hidden flex items-center justify-between sticky top-0 z-10">
-          <h1 className="text-lg font-bold text-gray-900">iFinance</h1>
-          <button onClick={handleLogout} className="text-gray-500">
-            <LogOut className="h-5 w-5" />
-          </button>
+      <div className="flex-1 flex flex-col min-w-0 bg-white">
+        
+        {/* Top Header */}
+        <header className="h-14 border-b border-slate-100 bg-white flex items-center justify-between px-4 sm:px-8 shrink-0">
+          <div className="flex items-center gap-4 flex-1">
+            <button 
+              className="md:hidden text-slate-500"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+            
+            {/* Breadcrumbs / Context */}
+            {/* Breadcrumbs / Context */}
+            <div className="hidden md:flex items-center gap-2 text-sm text-slate-500">
+              <span className="font-medium text-slate-900">i finance</span>
+              {location.pathname.split('/').filter(Boolean).map((segment, index, array) => {
+                if (segment.toLowerCase() === 'jira') return null;
+
+                const path = `/${array.slice(0, index + 1).join('/')}`;
+                const isLast = index === array.length - 1;
+                const formatSegment = (str) => {
+                  return str
+                    .replace(/-/g, ' ')
+                    .replace(/\b\w/g, c => c.toUpperCase());
+                };
+
+                return (
+                  <React.Fragment key={path}>
+                    <span className="text-slate-300">/</span>
+                    <span 
+                      className={`${isLast ? 'text-slate-500' : 'hover:text-slate-900 cursor-pointer'}`}
+                      onClick={() => !isLast && navigate(path)}
+                    >
+                      {formatSegment(segment)}
+                    </span>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {/* Search */}
+            <div className="relative hidden sm:block">
+              <Search className="absolute left-2.5 top-1.5 h-4 w-4 text-slate-400" />
+              <input 
+                type="text" 
+                placeholder="Search i finance" 
+                className="pl-9 pr-4 py-1.5 bg-slate-100 border-none rounded-md text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 w-64"
+              />
+            </div>
+
+            <div className="h-4 w-px bg-slate-200 mx-2"></div>
+
+
+            
+            <div className="relative">
+              <div 
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs cursor-pointer hover:bg-blue-700 transition-colors select-none"
+              >
+                MA
+              </div>
+
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-1 z-50 animate-in fade-in zoom-in-95 duration-200">
+                  <div className="px-4 py-3 border-b border-slate-50">
+                    <p className="text-sm font-bold text-slate-900">Mohib Ali</p>
+                    <p className="text-xs text-slate-500">admin@ifinance.com</p>
+                  </div>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
+                  >
+                    <LogOut className="h-4 w-4" /> Sign out
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </header>
-        <div className="p-8 max-w-[1600px] mx-auto">
+
+        {/* Page Content */}
+        <main className="flex-1 overflow-auto bg-white">
           <Outlet />
-        </div>
-      </main>
+        </main>
+      </div>
+
     </div>
   );
 };

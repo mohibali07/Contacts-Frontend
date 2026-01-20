@@ -150,7 +150,7 @@ const TeamForm = () => {
 
     // Handle Redirection
     if (redirectMode === 'list') {
-      navigate('/jira/teams');
+      navigate('/teams');
     } else if (redirectMode === 'add_another') {
       setFormData({
         name: '',
@@ -159,11 +159,11 @@ const TeamForm = () => {
         members: []
       });
       if (isEdit) {
-        navigate('/jira/teams/add');
+        navigate('/teams/add');
       }
     } else if (redirectMode === 'continue') {
       if (!isEdit && newId) {
-        navigate(`/jira/teams/edit/${newId}`, { replace: true });
+        navigate(`/teams/edit/${newId}`, { replace: true });
       }
     }
   };
@@ -181,7 +181,7 @@ const TeamForm = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
-              onClick={() => navigate('/jira/teams')}
+              onClick={() => navigate('/teams')}
               className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />

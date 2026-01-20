@@ -61,7 +61,7 @@ const Tasks = () => {
       header: 'TITLE', 
       accessor: 'title', 
       render: (item) => (
-        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/jira/tasks/edit/${item.id}`)}>
+        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/tasks/edit/${item.id}`)}>
           {item.title}
         </span>
       )
@@ -212,8 +212,8 @@ const Tasks = () => {
       subtitle=""
       columns={columns}
       data={filteredData}
-      onAdd={() => navigate('/jira/tasks/add')}
-      onEdit={(item) => navigate(`/jira/tasks/edit/${item.id}`)}
+      onAdd={() => navigate('/tasks/add')}
+      onEdit={(item) => navigate(`/tasks/edit/${item.id}`)}
       onDelete={(item) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
           const newTasks = tasks.filter(t => t.id !== item.id);

@@ -83,7 +83,7 @@ const TaskSubmissionForm = () => {
 
     // Handle Redirection
     if (redirectMode === 'list') {
-      navigate('/jira/task-submissions');
+      navigate('/task-submissions');
     } else if (redirectMode === 'add_another') {
       setFormData({
         task: '',
@@ -93,11 +93,11 @@ const TaskSubmissionForm = () => {
         created_at: new Date().toISOString()
       });
       if (isEdit) {
-        navigate('/jira/task-submissions/add');
+        navigate('/task-submissions/add');
       }
     } else if (redirectMode === 'continue') {
       if (!isEdit && newId) {
-        navigate(`/jira/task-submissions/edit/${newId}`, { replace: true });
+        navigate(`/task-submissions/edit/${newId}`, { replace: true });
       }
     }
   };
@@ -115,7 +115,7 @@ const TaskSubmissionForm = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
-              onClick={() => navigate('/jira/task-submissions')}
+              onClick={() => navigate('/task-submissions')}
               className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />

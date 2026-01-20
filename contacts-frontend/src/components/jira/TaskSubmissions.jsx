@@ -38,7 +38,7 @@ const TaskSubmissions = () => {
       header: 'TASK', 
       accessor: 'task', 
       render: (item) => (
-        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/jira/task-submissions/edit/${item.id}`)}>
+        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/task-submissions/edit/${item.id}`)}>
           {item.task}
         </span>
       )
@@ -153,8 +153,8 @@ const TaskSubmissions = () => {
       subtitle=""
       columns={columns}
       data={filteredData}
-      onAdd={() => navigate('/jira/task-submissions/add')}
-      onEdit={(item) => navigate(`/jira/task-submissions/edit/${item.id}`)}
+      onAdd={() => navigate('/task-submissions/add')}
+      onEdit={(item) => navigate(`/task-submissions/edit/${item.id}`)}
       onDelete={(item) => {
         if (window.confirm('Are you sure you want to delete this submission?')) {
           const newSubmissions = submissions.filter(s => s.id !== item.id);

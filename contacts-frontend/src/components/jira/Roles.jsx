@@ -44,8 +44,8 @@ const Roles = () => {
       subtitle="" // Screenshot doesn't have a subtitle, but GenericList might expect one. Leaving empty or minimal.
       columns={columns}
       data={roles}
-      onAdd={() => navigate('/jira/roles/add')}
-      onEdit={(item) => navigate(`/jira/roles/edit/${item.id}`)}
+      onAdd={() => navigate('/roles/add')}
+      onEdit={(item) => navigate(`/roles/edit/${item.id}`)}
       onDelete={(item) => {
         if (window.confirm('Are you sure you want to delete this role?')) {
           const newRoles = roles.filter(r => r.id !== item.id);
