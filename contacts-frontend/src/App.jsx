@@ -15,6 +15,7 @@ import Teams from './components/jira/Teams';
 import TeamForm from './components/jira/TeamForm';
 import Users from './components/jira/Users';
 import UserForm from './components/jira/UserForm';
+import Settings from './components/Settings';
 
 // Simple Protected Route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -66,7 +67,7 @@ function App() {
           <Route path="users/add" element={<UserForm />} />
           <Route path="users/edit/:id" element={<UserForm />} />
           
-          <Route path="settings" element={<div className="text-2xl font-bold text-gray-800">Settings</div>} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

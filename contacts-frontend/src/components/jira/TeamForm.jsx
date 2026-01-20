@@ -174,7 +174,7 @@ const TeamForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50 p-6 sm:p-10 font-sans text-slate-800">
+    <div className="min-h-screen bg-gray-50/50 dark:bg-slate-900 p-6 sm:p-10 font-sans text-slate-800 dark:text-slate-200">
       <div className="max-w-5xl mx-auto space-y-8">
         
         {/* Header */}
@@ -182,12 +182,12 @@ const TeamForm = () => {
           <div className="flex items-center gap-4">
             <button 
               onClick={() => navigate('/teams')}
-              className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
+              className="p-2 hover:bg-white dark:hover:bg-slate-800 rounded-full transition-colors text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />
             </button>
             <div>
-              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {isEdit ? 'Change team' : 'Add team'}
               </h1>
             </div>
@@ -195,12 +195,12 @@ const TeamForm = () => {
         </div>
 
         {/* Form Card */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
           <div className="p-8 space-y-8">
             
             {/* Name */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <label className="md:col-span-2 text-sm font-bold text-slate-700">
+              <label className="md:col-span-2 text-sm font-bold text-slate-700 dark:text-slate-300">
                 Name:
               </label>
               <div className="md:col-span-10">
@@ -210,14 +210,16 @@ const TeamForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full max-w-md px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all font-medium"
+                  onChange={handleChange}
+                  required
+                  className="w-full max-w-md px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all font-medium"
                 />
               </div>
             </div>
 
             {/* Department */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <label className="md:col-span-2 text-sm font-bold text-slate-700">
+              <label className="md:col-span-2 text-sm font-bold text-slate-700 dark:text-slate-300">
                 Department:
               </label>
               <div className="md:col-span-10 flex items-center gap-3">
@@ -232,17 +234,17 @@ const TeamForm = () => {
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
                 </select>
-                <div className="flex items-center gap-1 text-slate-400">
+                <div className="flex items-center gap-1 text-slate-400 dark:text-slate-500">
                   <Edit2 className="h-4 w-4 hover:text-blue-600 cursor-pointer" />
                   <Plus className="h-5 w-5 hover:text-green-600 cursor-pointer" />
-                  <Eye className="h-5 w-5 hover:text-slate-800 cursor-pointer" />
+                  <Eye className="h-5 w-5 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer" />
                 </div>
               </div>
             </div>
 
             {/* Lead */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <label className="md:col-span-2 text-sm font-bold text-slate-700">
+              <label className="md:col-span-2 text-sm font-bold text-slate-700 dark:text-slate-300">
                 Lead:
               </label>
               <div className="md:col-span-10 flex items-center gap-3">
@@ -257,18 +259,18 @@ const TeamForm = () => {
                     <option key={opt.id} value={opt.value}>{opt.value}</option>
                   ))}
                 </select>
-                <div className="flex items-center gap-1 text-slate-400">
+                <div className="flex items-center gap-1 text-slate-400 dark:text-slate-500">
                   <Edit2 className="h-4 w-4 hover:text-blue-600 cursor-pointer" />
                   <Plus className="h-5 w-5 hover:text-green-600 cursor-pointer" />
                   <X className="h-5 w-5 hover:text-red-600 cursor-pointer" />
-                  <Eye className="h-5 w-5 hover:text-slate-800 cursor-pointer" />
+                  <Eye className="h-5 w-5 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer" />
                 </div>
               </div>
             </div>
 
             {/* Members (Dual Listbox) */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start mt-8">
-              <label className="md:col-span-2 text-sm font-bold text-slate-700 pt-2">
+              <label className="md:col-span-2 text-sm font-bold text-slate-700 dark:text-slate-300 pt-2">
                 Members:
               </label>
               <div className="md:col-span-10">
@@ -279,10 +281,10 @@ const TeamForm = () => {
                     <div className="bg-slate-900 text-white px-3 py-2 text-xs font-bold rounded-t-lg">
                       Available members
                     </div>
-                    <div className="bg-slate-50 border border-slate-200 border-t-0 p-3 text-xs text-slate-500 h-16">
+                    <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 border-t-0 p-3 text-xs text-slate-500 dark:text-slate-400 h-16">
                       Choose members by selecting them and then select the "Choose" arrow button.
                     </div>
-                    <div className="border border-slate-200 border-t-0 bg-white p-2">
+                    <div className="border border-slate-200 dark:border-slate-700 border-t-0 bg-white dark:bg-slate-900 p-2">
                       <div className="relative mb-2">
                         <Search className="absolute left-2 top-1.5 h-4 w-4 text-slate-400" />
                         <input 
@@ -298,7 +300,7 @@ const TeamForm = () => {
                           <div 
                             key={u.id}
                             onClick={() => handleSelectAvailable(u.value)}
-                            className={`px-3 py-2 text-sm cursor-pointer hover:bg-blue-50 ${selectedAvailable.includes(u.value) ? 'bg-blue-100 text-blue-800 font-medium' : 'text-slate-700'}`}
+                            className={`px-3 py-2 text-sm cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900/30 ${selectedAvailable.includes(u.value) ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 font-medium' : 'text-slate-700 dark:text-slate-300'}`}
                           >
                             {u.label}
                           </div>
@@ -319,7 +321,7 @@ const TeamForm = () => {
                     <button 
                       type="button"
                       onClick={moveRight}
-                      className="p-2 bg-slate-200 text-slate-600 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+                      className="p-2 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
                       title="Add selected"
                     >
                       <ChevronRight className="h-5 w-5" />
@@ -327,7 +329,7 @@ const TeamForm = () => {
                     <button 
                       type="button"
                       onClick={moveLeft}
-                      className="p-2 bg-slate-200 text-slate-600 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+                      className="p-2 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
                       title="Remove selected"
                     >
                       <ChevronLeft className="h-5 w-5" />
@@ -340,10 +342,10 @@ const TeamForm = () => {
                       <span>Chosen members</span>
                       <Plus className="h-4 w-4 cursor-pointer hover:text-blue-200" />
                     </div>
-                    <div className="bg-blue-50 border border-blue-100 border-t-0 p-3 text-xs text-blue-800 h-16">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900 border-t-0 p-3 text-xs text-blue-800 dark:text-blue-300 h-16">
                       Remove members by selecting them and then select the "Remove" arrow button.
                     </div>
-                    <div className="border border-slate-200 border-t-0 bg-white p-2">
+                    <div className="border border-slate-200 dark:border-slate-700 border-t-0 bg-white dark:bg-slate-900 p-2">
                       <div className="relative mb-2">
                         <Search className="absolute left-2 top-1.5 h-4 w-4 text-slate-400" />
                         <input 
@@ -359,7 +361,7 @@ const TeamForm = () => {
                           <div 
                             key={u.id}
                             onClick={() => handleSelectChosen(u.value)}
-                            className={`px-3 py-2 text-sm cursor-pointer hover:bg-red-50 ${selectedChosen.includes(u.value) ? 'bg-red-100 text-red-800 font-medium' : 'text-slate-700'}`}
+                            className={`px-3 py-2 text-sm cursor-pointer hover:bg-red-50 dark:hover:bg-red-900/30 ${selectedChosen.includes(u.value) ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 font-medium' : 'text-slate-700 dark:text-slate-300'}`}
                           >
                             {u.label}
                           </div>
@@ -385,7 +387,7 @@ const TeamForm = () => {
           </div>
 
           {/* Footer Buttons */}
-          <div className="bg-slate-50 px-8 py-6 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-4">
+          <div className="bg-slate-50 dark:bg-slate-900 px-8 py-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4">
             <button
               type="submit"
               className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-blue-300 transition-all flex items-center justify-center gap-2"
@@ -397,14 +399,14 @@ const TeamForm = () => {
               <button
                 type="button"
                 onClick={() => saveTeam('add_another')}
-                className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
               >
                 Save and add another
               </button>
               <button
                 type="button"
                 onClick={() => saveTeam('continue')}
-                className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
               >
                 Save and continue editing
               </button>

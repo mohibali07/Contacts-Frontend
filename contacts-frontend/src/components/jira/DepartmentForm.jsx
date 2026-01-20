@@ -140,6 +140,10 @@ const DepartmentForm = () => {
       alert('Parent department record not found.');
     }
   };
+
+  const handleDeleteParent = () => {
+    setFormData(prev => ({ ...prev, parent: '' }));
+  };
   const handleModalSubmit = (e) => {
     e.preventDefault();
     if (!parentFormName.trim()) return;
@@ -185,7 +189,7 @@ const DepartmentForm = () => {
   const isParentSelected = !!formData.parent;
 
   return (
-    <div className="min-h-screen bg-gray-50/50 p-6 sm:p-10 font-sans text-slate-800">
+    <div className="min-h-screen bg-gray-50/50 dark:bg-slate-900 p-6 sm:p-10 font-sans text-slate-800 dark:text-slate-200">
       <div className="max-w-5xl mx-auto space-y-8">
         
         {/* Header */}
@@ -193,15 +197,15 @@ const DepartmentForm = () => {
           <div className="flex items-center gap-4">
             <button 
               onClick={() => navigate('/departments')}
-              className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
+              className="p-2 hover:bg-white dark:hover:bg-slate-800 rounded-full transition-colors text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />
             </button>
             <div>
-              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {isEdit ? 'Edit Department' : 'Add Department'}
               </h1>
-              <p className="text-slate-500 mt-1 text-sm font-medium">
+              <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm font-medium">
                 {isEdit ? 'Update department details and hierarchy.' : 'Create a new department in the organization.'}
               </p>
             </div>
@@ -209,12 +213,12 @@ const DepartmentForm = () => {
         </div>
 
         {/* Form Card */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
           <div className="p-8 space-y-8">
             
             {/* Name Field */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-              <label className="md:col-span-3 text-sm font-bold text-slate-700 pt-3">
+              <label className="md:col-span-3 text-sm font-bold text-slate-700 dark:text-slate-300 pt-3">
                 Department Name
               </label>
               <div className="md:col-span-9">
@@ -225,17 +229,17 @@ const DepartmentForm = () => {
                   onChange={handleChange}
                   placeholder="e.g. Engineering"
                   required
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all font-medium"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all font-medium"
                 />
                 <p className="mt-2 text-xs text-slate-400">The name of the department as it will appear in reports.</p>
               </div>
             </div>
 
-            <div className="w-full h-px bg-slate-50"></div>
+            <div className="w-full h-px bg-slate-50 dark:bg-slate-700"></div>
 
             {/* Description Field */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-              <label className="md:col-span-3 text-sm font-bold text-slate-700 pt-3">
+              <label className="md:col-span-3 text-sm font-bold text-slate-700 dark:text-slate-300 pt-3">
                 Description
               </label>
               <div className="md:col-span-9">
@@ -245,16 +249,16 @@ const DepartmentForm = () => {
                   onChange={handleChange}
                   rows={5}
                   placeholder="Brief description of the department's responsibilities..."
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all font-medium resize-y"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all font-medium resize-y"
                 />
               </div>
             </div>
 
-            <div className="w-full h-px bg-slate-50"></div>
+            <div className="w-full h-px bg-slate-50 dark:bg-slate-700"></div>
 
             {/* Parent Field */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-              <label className="md:col-span-3 text-sm font-bold text-slate-700 pt-3">
+              <label className="md:col-span-3 text-sm font-bold text-slate-700 dark:text-slate-300 pt-3">
                 Parent Department
               </label>
               <div className="md:col-span-9">
@@ -264,7 +268,7 @@ const DepartmentForm = () => {
                       name="parent"
                       value={formData.parent}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all font-medium appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all font-medium appearance-none cursor-pointer"
                     >
                       <option value="">None (Top Level)</option>
                       {parentOptions.map(opt => (
@@ -277,7 +281,7 @@ const DepartmentForm = () => {
                   </div>
                   
                   {/* Action Buttons */}
-                  <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-lg border border-slate-200">
+                  <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-700">
                     <button 
                       type="button" 
                       onClick={handleOpenEditParent}
@@ -337,7 +341,7 @@ const DepartmentForm = () => {
           </div>
 
           {/* Footer Buttons */}
-          <div className="bg-slate-50 px-8 py-6 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-4">
+          <div className="bg-slate-50 dark:bg-slate-900 px-8 py-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4">
             <button
               type="submit"
               className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-blue-300 transition-all flex items-center justify-center gap-2"
@@ -349,14 +353,14 @@ const DepartmentForm = () => {
               <button
                 type="button"
                 onClick={() => saveDepartment('add_another')}
-                className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
               >
                 Save and add another
               </button>
               <button
                 type="button"
                 onClick={() => saveDepartment('continue')}
-                className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
               >
                 Save and continue editing
               </button>

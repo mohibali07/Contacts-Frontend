@@ -32,21 +32,21 @@ const Tasks = () => {
 
   const getPriorityColor = (priority) => {
     switch (priority?.toLowerCase()) {
-      case 'critical': return 'text-red-600 font-bold';
-      case 'high': return 'text-orange-500 font-bold';
-      case 'medium': return 'text-blue-600 font-bold';
-      case 'low': return 'text-green-600 font-bold';
-      default: return 'text-slate-600';
+      case 'critical': return 'text-red-600 dark:text-red-400 font-bold';
+      case 'high': return 'text-orange-500 dark:text-orange-400 font-bold';
+      case 'medium': return 'text-blue-600 dark:text-blue-400 font-bold';
+      case 'low': return 'text-green-600 dark:text-green-400 font-bold';
+      default: return 'text-slate-600 dark:text-slate-400';
     }
   };
 
   const getStatusColor = (status) => {
     switch (status?.toLowerCase()) {
-      case 'completed': return 'text-green-600 font-bold';
-      case 'in progress': return 'text-blue-600 font-bold';
-      case 'pending': return 'text-orange-500 font-bold';
-      case 'overdue': return 'text-red-600 font-bold';
-      default: return 'text-slate-600';
+      case 'completed': return 'text-green-600 dark:text-green-400 font-bold';
+      case 'in progress': return 'text-blue-600 dark:text-blue-400 font-bold';
+      case 'pending': return 'text-orange-500 dark:text-orange-400 font-bold';
+      case 'overdue': return 'text-red-600 dark:text-red-400 font-bold';
+      default: return 'text-slate-600 dark:text-slate-400';
     }
   };
 
@@ -61,7 +61,7 @@ const Tasks = () => {
       header: 'TITLE', 
       accessor: 'title', 
       render: (item) => (
-        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/tasks/edit/${item.id}`)}>
+        <span className="font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer" onClick={() => navigate(`/tasks/edit/${item.id}`)}>
           {item.title}
         </span>
       )
@@ -70,7 +70,7 @@ const Tasks = () => {
       header: 'ASSIGNED TO COLORED', 
       accessor: 'assigned_to',
       render: (item) => (
-        <span className="text-slate-700">{item.assigned_to || '-'}</span>
+        <span className="text-slate-700 dark:text-slate-200">{item.assigned_to || '-'}</span>
       )
     },
     { 
@@ -91,14 +91,14 @@ const Tasks = () => {
       header: 'DEADLINE', 
       accessor: 'deadline',
       render: (item) => (
-        <span className="text-slate-700">{formatDate(item.deadline)}</span>
+        <span className="text-slate-700 dark:text-slate-200">{formatDate(item.deadline)}</span>
       )
     },
     { 
       header: 'ASSIGNED BY', 
       accessor: 'assigned_by',
       render: (item) => (
-        <span className="text-slate-700">{item.assigned_by || '-'}</span>
+        <span className="text-slate-700 dark:text-slate-200">{item.assigned_by || '-'}</span>
       )
     },
   ];
@@ -139,13 +139,13 @@ const Tasks = () => {
     <div className="space-y-6">
       {/* By Status */}
       <div>
-        <label className="block text-xs font-bold text-blue-400 uppercase mb-2 flex items-center gap-1">
-          <span className="text-blue-500">↓</span> By status
+        <label className="block text-xs font-bold text-blue-400 dark:text-blue-500 uppercase mb-2 flex items-center gap-1">
+          <span className="text-blue-500 dark:text-blue-400">↓</span> By status
         </label>
         <div className="space-y-1 pl-2">
           {['All', 'Pending', 'In Progress', 'Completed', 'Overdue'].map((option) => (
             <label key={option} className="flex items-center gap-2 cursor-pointer group">
-              <span className={`text-sm ${selectedStatus.includes(option) ? 'font-bold text-slate-900' : 'text-slate-600'} group-hover:text-slate-900 transition-colors`}>
+              <span className={`text-sm ${selectedStatus.includes(option) ? 'font-bold text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'} group-hover:text-slate-900 dark:group-hover:text-white transition-colors`}>
                 <input 
                   type="checkbox" 
                   className="hidden"
@@ -161,13 +161,13 @@ const Tasks = () => {
 
       {/* By Priority */}
       <div>
-        <label className="block text-xs font-bold text-blue-400 uppercase mb-2 flex items-center gap-1">
-          <span className="text-blue-500">↓</span> By priority
+        <label className="block text-xs font-bold text-blue-400 dark:text-blue-500 uppercase mb-2 flex items-center gap-1">
+          <span className="text-blue-500 dark:text-blue-400">↓</span> By priority
         </label>
         <div className="space-y-1 pl-2">
           {['All', 'Low', 'Medium', 'High', 'Critical'].map((option) => (
             <label key={option} className="flex items-center gap-2 cursor-pointer group">
-              <span className={`text-sm ${selectedPriority.includes(option) ? 'font-bold text-slate-900' : 'text-slate-600'} group-hover:text-slate-900 transition-colors`}>
+              <span className={`text-sm ${selectedPriority.includes(option) ? 'font-bold text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'} group-hover:text-slate-900 dark:group-hover:text-white transition-colors`}>
                 <input 
                   type="checkbox" 
                   className="hidden"
@@ -183,13 +183,13 @@ const Tasks = () => {
 
       {/* By Deadline */}
       <div>
-        <label className="block text-xs font-bold text-blue-400 uppercase mb-2 flex items-center gap-1">
-          <span className="text-blue-500">↓</span> By deadline
+        <label className="block text-xs font-bold text-blue-400 dark:text-blue-500 uppercase mb-2 flex items-center gap-1">
+          <span className="text-blue-500 dark:text-blue-400">↓</span> By deadline
         </label>
         <div className="space-y-1 pl-2">
           {['Any date', 'Today', 'Past 7 days', 'This month', 'This year'].map((option) => (
             <label key={option} className="flex items-center gap-2 cursor-pointer group">
-              <span className={`text-sm ${selectedDeadline === option ? 'font-bold text-slate-900' : 'text-slate-600'} group-hover:text-slate-900 transition-colors`}>
+              <span className={`text-sm ${selectedDeadline === option ? 'font-bold text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'} group-hover:text-slate-900 dark:group-hover:text-white transition-colors`}>
                 <input 
                   type="radio" 
                   name="deadline_filter"

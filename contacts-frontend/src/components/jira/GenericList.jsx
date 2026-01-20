@@ -42,15 +42,15 @@ const GenericList = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-6 sm:p-10 font-sans text-slate-800">
+    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-900 p-6 sm:p-10 font-sans text-slate-800 dark:text-slate-200">
       <div className="max-w-7xl mx-auto space-y-6">
         
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div>
-              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">{title}</h1>
-              {subtitle && <p className="text-slate-500 mt-1 text-sm font-medium">{subtitle}</p>}
+              <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">{title}</h1>
+              {subtitle && <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm font-medium">{subtitle}</p>}
             </div>
             {extraHeaderActions}
           </div>
@@ -73,7 +73,7 @@ const GenericList = ({
             placeholder="Search records..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="block w-full pl-11 pr-4 py-4 bg-white border border-slate-200 rounded-2xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all shadow-sm font-medium"
+            className="block w-full pl-11 pr-4 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all shadow-sm font-medium"
           />
           
           {/* Filter Button (Absolute positioned inside search or separate?) 
@@ -92,31 +92,31 @@ const GenericList = ({
 
               {/* Filter Popup */}
               {isFilterOpen && (
-                <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-2xl shadow-xl border border-slate-100 z-50 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+                <div className="absolute right-0 top-full mt-2 w-72 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 z-50 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
                   <div className="p-5">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-bold text-slate-900 text-sm uppercase tracking-wider">Filter By</h3>
+                      <h3 className="font-bold text-slate-900 dark:text-white text-sm uppercase tracking-wider">Filter By</h3>
                       <button 
                         onClick={() => setIsFilterOpen(false)}
-                        className="text-slate-400 hover:text-slate-600 transition-colors"
+                        className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                       >
                         <X className="h-4 w-4" />
                       </button>
                     </div>
-                    <div className="text-sm text-slate-600">
+                    <div className="text-sm text-slate-600 dark:text-slate-300">
                       {filterContent}
                     </div>
                   </div>
-                  <div className="p-4 bg-slate-50 rounded-b-2xl border-t border-slate-100 flex justify-end gap-2">
+                  <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-b-2xl border-t border-slate-100 dark:border-slate-700 flex justify-end gap-2">
                     <button 
                       onClick={handleReset}
-                      className="px-3 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-200 rounded-lg transition-colors"
+                      className="px-3 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors"
                     >
                       Reset
                     </button>
                     <button 
                       onClick={() => setIsFilterOpen(false)}
-                      className="px-3 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors"
+                      className="px-3 py-1.5 text-xs font-semibold text-white bg-slate-900 dark:bg-blue-600 hover:bg-slate-800 dark:hover:bg-blue-700 rounded-lg transition-colors"
                     >
                       Apply
                     </button>
@@ -128,26 +128,26 @@ const GenericList = ({
         </div>
 
         {/* Data Table Card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-slate-100">
+                <tr className="border-b border-slate-100 dark:border-slate-700">
                   {columns.map((col, idx) => (
-                    <th key={idx} className="px-8 py-6 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <th key={idx} className="px-8 py-6 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                       {col.header}
                     </th>
                   ))}
-                  <th className="px-8 py-6 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <th className="px-8 py-6 text-right text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-slate-50 dark:divide-slate-700">
                 {filteredData.map((item, idx) => (
-                  <tr key={idx} className="group hover:bg-slate-50/50 transition-colors">
+                  <tr key={idx} className="group hover:bg-slate-50/50 dark:hover:bg-slate-700/50 transition-colors">
                     {columns.map((col, colIdx) => (
-                      <td key={colIdx} className="px-8 py-5 text-sm font-medium text-slate-700">
+                      <td key={colIdx} className="px-8 py-5 text-sm font-medium text-slate-700 dark:text-slate-200">
                         {col.render ? col.render(item) : item[col.accessor]}
                       </td>
                     ))}
@@ -176,11 +176,11 @@ const GenericList = ({
           {/* Empty State */}
           {filteredData.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-              <div className="bg-slate-50 p-4 rounded-full mb-4">
-                <Search className="h-8 w-8 text-slate-300" />
+              <div className="bg-slate-50 dark:bg-slate-700 p-4 rounded-full mb-4">
+                <Search className="h-8 w-8 text-slate-300 dark:text-slate-500" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-1">No results found</h3>
-              <p className="text-slate-500 max-w-sm mx-auto">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">No results found</h3>
+              <p className="text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                 We couldn't find any records matching your search.
               </p>
             </div>
@@ -188,15 +188,15 @@ const GenericList = ({
 
           {/* Footer / Pagination */}
           {filteredData.length > 0 && (
-            <div className="px-8 py-6 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-sm font-medium text-slate-400">
-                Showing <span className="text-slate-900 font-bold">{filteredData.length}</span> entries
+            <div className="px-8 py-6 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
+              <span className="text-sm font-medium text-slate-400 dark:text-slate-500">
+                Showing <span className="text-slate-900 dark:text-white font-bold">{filteredData.length}</span> entries
               </span>
               <div className="flex gap-2">
-                <button className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300 transition-all disabled:opacity-50 shadow-sm">
+                <button className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-600 transition-all disabled:opacity-50 shadow-sm">
                   Previous
                 </button>
-                <button className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300 transition-all disabled:opacity-50 shadow-sm">
+                <button className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-600 transition-all disabled:opacity-50 shadow-sm">
                   Next
                 </button>
               </div>

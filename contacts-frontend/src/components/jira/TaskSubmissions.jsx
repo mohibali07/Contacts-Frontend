@@ -38,7 +38,7 @@ const TaskSubmissions = () => {
       header: 'TASK', 
       accessor: 'task', 
       render: (item) => (
-        <span className="font-bold text-blue-600 hover:underline cursor-pointer" onClick={() => navigate(`/task-submissions/edit/${item.id}`)}>
+        <span className="font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer" onClick={() => navigate(`/task-submissions/edit/${item.id}`)}>
           {item.task}
         </span>
       )
@@ -47,21 +47,21 @@ const TaskSubmissions = () => {
       header: 'SUBMITTED BY', 
       accessor: 'submitted_by',
       render: (item) => (
-        <span className="text-slate-700">{item.submitted_by || '-'}</span>
+        <span className="text-slate-700 dark:text-slate-200">{item.submitted_by || '-'}</span>
       )
     },
     { 
       header: 'SUBMISSION NOTE', 
       accessor: 'submission_note',
       render: (item) => (
-        <span className="text-slate-700">{item.submission_note || '-'}</span>
+        <span className="text-slate-700 dark:text-slate-200">{item.submission_note || '-'}</span>
       )
     },
     { 
       header: 'CREATED AT', 
       accessor: 'created_at',
       render: (item) => (
-        <span className="text-slate-700">{formatDate(item.created_at)}</span>
+        <span className="text-slate-700 dark:text-slate-200">{formatDate(item.created_at)}</span>
       )
     },
   ];
@@ -102,13 +102,13 @@ const TaskSubmissions = () => {
     <div className="space-y-6">
       {/* By Created At */}
       <div>
-        <label className="block text-xs font-bold text-blue-400 uppercase mb-2 flex items-center gap-1">
-          <span className="text-blue-500">↓</span> By created at
+        <label className="block text-xs font-bold text-blue-400 dark:text-blue-500 uppercase mb-2 flex items-center gap-1">
+          <span className="text-blue-500 dark:text-blue-400">↓</span> By created at
         </label>
         <div className="space-y-1 pl-2">
           {['Any date', 'Today', 'Past 7 days', 'This month', 'This year'].map((option) => (
             <label key={option} className="flex items-center gap-2 cursor-pointer group">
-              <span className={`text-sm ${selectedCreatedAt === option ? 'font-bold text-slate-900' : 'text-slate-600'} group-hover:text-slate-900 transition-colors`}>
+              <span className={`text-sm ${selectedCreatedAt === option ? 'font-bold text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'} group-hover:text-slate-900 dark:group-hover:text-white transition-colors`}>
                 <input 
                   type="radio" 
                   name="created_at_filter"
@@ -125,13 +125,13 @@ const TaskSubmissions = () => {
 
       {/* By Priority */}
       <div>
-        <label className="block text-xs font-bold text-blue-400 uppercase mb-2 flex items-center gap-1">
-          <span className="text-blue-500">↓</span> By priority
+        <label className="block text-xs font-bold text-blue-400 dark:text-blue-500 uppercase mb-2 flex items-center gap-1">
+          <span className="text-blue-500 dark:text-blue-400">↓</span> By priority
         </label>
         <div className="space-y-1 pl-2">
           {['All', 'Low', 'Medium', 'High', 'Critical'].map((option) => (
             <label key={option} className="flex items-center gap-2 cursor-pointer group">
-              <span className={`text-sm ${selectedPriority.includes(option) ? 'font-bold text-slate-900' : 'text-slate-600'} group-hover:text-slate-900 transition-colors`}>
+              <span className={`text-sm ${selectedPriority.includes(option) ? 'font-bold text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400'} group-hover:text-slate-900 dark:group-hover:text-white transition-colors`}>
                 <input 
                   type="checkbox" 
                   className="hidden"

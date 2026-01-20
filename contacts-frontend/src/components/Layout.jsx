@@ -17,7 +17,9 @@ import {
   HelpCircle,
   ChevronRight,
   Plus,
-  BarChart2
+  BarChart2,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 const SidebarItem = ({ icon: Icon, label, path, active, onClick, hasSubmenu }) => (
@@ -25,8 +27,8 @@ const SidebarItem = ({ icon: Icon, label, path, active, onClick, hasSubmenu }) =
     onClick={onClick}
     className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-all text-base font-medium mb-0.5
       ${active 
-        ? 'bg-blue-50 text-blue-700' 
-        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+        ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400' 
+        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'
       }`}
   >
     <Icon className={`h-5 w-5 ${active ? 'text-blue-600' : 'text-slate-400'}`} />
@@ -53,6 +55,20 @@ const Layout = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  React.useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
@@ -62,23 +78,23 @@ const Layout = () => {
   const isActive = (path) => location.pathname.startsWith(path);
 
   return (
-    <div className="min-h-screen bg-white flex font-sans text-slate-800">
+    <div className="min-h-screen bg-white dark:bg-slate-900 flex font-sans text-slate-800 dark:text-slate-200">
       
       {/* Sidebar */}
       <aside 
         className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-slate-50 border-r border-slate-200 transform transition-transform duration-200 ease-in-out
+          fixed inset-y-0 left-0 z-50 w-64 bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transform transition-transform duration-200 ease-in-out
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
           md:relative md:translate-x-0
         `}
       >
         {/* Sidebar Header */}
-        <div className="h-14 flex items-center px-4 border-b border-slate-200/50">
+        <div className="h-14 flex items-center px-4 border-b border-slate-200/50 dark:border-slate-800">
           <div className="flex items-center gap-2">
-            <div className="h-6 w-6 bg-slate-900 rounded-md flex items-center justify-center">
-              <span className="text-white font-bold text-xs">i</span>
+            <div className="h-6 w-6 bg-slate-900 dark:bg-blue-600 rounded-md flex items-center justify-center">
+              <span className="text-white font-bold text-xs">I</span>
             </div>
-            <span className="font-bold text-slate-900 text-sm">i finance</span>
+            <span className="font-bold text-slate-900 dark:text-white text-sm">i-Finance</span>
             <ChevronRight className="h-3 w-3 text-slate-400 ml-auto" />
           </div>
           <button 
@@ -102,7 +118,7 @@ const Layout = () => {
             <SidebarItem icon={FileText} label="Submissions" path="/task-submissions" active={isActive('/task-submissions')} onClick={() => navigate('/task-submissions')} />
           </SidebarGroup>
 
-          <SidebarGroup title="Settings">
+          <SidebarGroup>
             <SidebarItem icon={Settings} label="Settings" path="/settings" active={isActive('/settings')} onClick={() => navigate('/settings')} />
             <SidebarItem icon={LogOut} label="Logout" path="/logout" onClick={handleLogout} />
           </SidebarGroup>
@@ -111,10 +127,10 @@ const Layout = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 bg-white">
+      <div className="flex-1 flex flex-col min-w-0 bg-white dark:bg-slate-900">
         
         {/* Top Header */}
-        <header className="h-14 border-b border-slate-100 bg-white flex items-center justify-between px-4 sm:px-8 shrink-0">
+        <header className="h-14 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between px-4 sm:px-8 shrink-0">
           <div className="flex items-center gap-4 flex-1">
             <button 
               className="md:hidden text-slate-500"
@@ -125,8 +141,9 @@ const Layout = () => {
             
             {/* Breadcrumbs / Context */}
             {/* Breadcrumbs / Context */}
-            <div className="hidden md:flex items-center gap-2 text-sm text-slate-500">
-              <span className="font-medium text-slate-900">i finance</span>
+            {/* Breadcrumbs / Context */}
+            <div className="hidden md:flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <span className="font-medium text-slate-900 dark:text-slate-200">i-Finance</span>
               {location.pathname.split('/').filter(Boolean).map((segment, index, array) => {
                 if (segment.toLowerCase() === 'jira') return null;
 
@@ -160,13 +177,19 @@ const Layout = () => {
               <input 
                 type="text" 
                 placeholder="Search i finance" 
-                className="pl-9 pr-4 py-1.5 bg-slate-100 border-none rounded-md text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 w-64"
+                className="pl-9 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-md text-sm text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 w-64"
               />
             </div>
 
-            <div className="h-4 w-px bg-slate-200 mx-2"></div>
+            <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
 
-
+            <button 
+              onClick={toggleTheme}
+              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+            >
+              {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+            </button>
             
             <div className="relative">
               <div 
@@ -177,14 +200,14 @@ const Layout = () => {
               </div>
 
               {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-1 z-50 animate-in fade-in zoom-in-95 duration-200">
-                  <div className="px-4 py-3 border-b border-slate-50">
-                    <p className="text-sm font-bold text-slate-900">Mohib Ali</p>
-                    <p className="text-xs text-slate-500">admin@ifinance.com</p>
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 py-1 z-50 animate-in fade-in zoom-in-95 duration-200">
+                  <div className="px-4 py-3 border-b border-slate-50 dark:border-slate-700">
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">Mohib Ali</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">admin@ifinance.com</p>
                   </div>
                   <button 
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-2"
                   >
                     <LogOut className="h-4 w-4" /> Sign out
                   </button>
@@ -195,7 +218,7 @@ const Layout = () => {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto bg-white">
+        <main className="flex-1 overflow-auto bg-white dark:bg-slate-900">
           <Outlet />
         </main>
       </div>

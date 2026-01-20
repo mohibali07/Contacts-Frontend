@@ -81,7 +81,7 @@ const RoleForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50 p-6 sm:p-10 font-sans text-slate-800">
+    <div className="min-h-screen bg-gray-50/50 dark:bg-slate-900 p-6 sm:p-10 font-sans text-slate-800 dark:text-slate-200">
       <div className="max-w-5xl mx-auto space-y-8">
         
         {/* Header */}
@@ -89,12 +89,12 @@ const RoleForm = () => {
           <div className="flex items-center gap-4">
             <button 
               onClick={() => navigate('/roles')}
-              className="p-2 hover:bg-white rounded-full transition-colors text-slate-500 hover:text-slate-700 hover:shadow-sm"
+              className="p-2 hover:bg-white dark:hover:bg-slate-800 rounded-full transition-colors text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:shadow-sm"
             >
               <ArrowLeft className="h-6 w-6" />
             </button>
             <div>
-              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {isEdit ? 'Change role' : 'Add role'}
               </h1>
             </div>
@@ -102,12 +102,12 @@ const RoleForm = () => {
         </div>
 
         {/* Form Card */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
           <div className="p-8 space-y-8">
             
             {/* Name Field */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-              <label className="md:col-span-3 text-sm font-bold text-slate-700 pt-3">
+              <label className="md:col-span-3 text-sm font-bold text-slate-700 dark:text-slate-300 pt-3">
                 Name
               </label>
               <div className="md:col-span-9">
@@ -117,16 +117,16 @@ const RoleForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all font-medium"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all font-medium"
                 />
               </div>
             </div>
 
-            <div className="w-full h-px bg-slate-50"></div>
+            <div className="w-full h-px bg-slate-50 dark:bg-slate-700"></div>
 
             {/* Description Field */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-              <label className="md:col-span-3 text-sm font-bold text-slate-700 pt-3">
+              <label className="md:col-span-3 text-sm font-bold text-slate-700 dark:text-slate-300 pt-3">
                 Description
               </label>
               <div className="md:col-span-9">
@@ -134,8 +134,9 @@ const RoleForm = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
+                  onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all font-medium resize-y"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 focus:border-blue-400 transition-all font-medium resize-y"
                 />
               </div>
             </div>
@@ -145,8 +146,8 @@ const RoleForm = () => {
               <div className="bg-blue-600 px-4 py-2 rounded-t-lg">
                 <h3 className="text-white font-bold text-sm uppercase tracking-wide">Permissions</h3>
               </div>
-              <div className="bg-slate-50 border border-slate-200 border-t-0 rounded-b-lg p-6 space-y-6">
-                <p className="text-sm text-slate-500 mb-4">Check boxes to grant specific permissions.</p>
+              <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 border-t-0 rounded-b-lg p-6 space-y-6">
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Check boxes to grant specific permissions.</p>
                 
                 {/* Permission 1 */}
                 <div className="flex items-start gap-3">
@@ -157,14 +158,14 @@ const RoleForm = () => {
                       type="checkbox"
                       checked={formData.canViewAllTasks}
                       onChange={handleChange}
-                      className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
+                      className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-600 dark:bg-slate-800"
                     />
                   </div>
                   <div className="text-sm leading-6">
-                    <label htmlFor="canViewAllTasks" className="font-medium text-slate-900">
+                    <label htmlFor="canViewAllTasks" className="font-medium text-slate-900 dark:text-white">
                       Can view all tasks
                     </label>
-                    <p className="text-slate-500">Can view all tasks in the system.</p>
+                    <p className="text-slate-500 dark:text-slate-400">Can view all tasks in the system.</p>
                   </div>
                 </div>
 
@@ -177,14 +178,14 @@ const RoleForm = () => {
                       type="checkbox"
                       checked={formData.canViewAllTeams}
                       onChange={handleChange}
-                      className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
+                      className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-600 dark:bg-slate-800"
                     />
                   </div>
                   <div className="text-sm leading-6">
-                    <label htmlFor="canViewAllTeams" className="font-medium text-slate-900">
+                    <label htmlFor="canViewAllTeams" className="font-medium text-slate-900 dark:text-white">
                       Can view all teams
                     </label>
-                    <p className="text-slate-500">Can view all teams in the system.</p>
+                    <p className="text-slate-500 dark:text-slate-400">Can view all teams in the system.</p>
                   </div>
                 </div>
 
@@ -197,14 +198,14 @@ const RoleForm = () => {
                       type="checkbox"
                       checked={formData.isTeamLeadRole}
                       onChange={handleChange}
-                      className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
+                      className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-600 dark:bg-slate-800"
                     />
                   </div>
                   <div className="text-sm leading-6">
-                    <label htmlFor="isTeamLeadRole" className="font-medium text-slate-900">
+                    <label htmlFor="isTeamLeadRole" className="font-medium text-slate-900 dark:text-white">
                       Is team lead role
                     </label>
-                    <p className="text-slate-500">If True, restricts view to own team/subordinates (logic handled in Admin).</p>
+                    <p className="text-slate-500 dark:text-slate-400">If True, restricts view to own team/subordinates (logic handled in Admin).</p>
                   </div>
                 </div>
 
@@ -214,7 +215,7 @@ const RoleForm = () => {
           </div>
 
           {/* Footer Buttons */}
-          <div className="bg-slate-50 px-8 py-6 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-4">
+          <div className="bg-slate-50 dark:bg-slate-900 px-8 py-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4">
             <button
               type="submit"
               className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-blue-300 transition-all flex items-center justify-center gap-2"
@@ -226,14 +227,14 @@ const RoleForm = () => {
               <button
                 type="button"
                 onClick={() => saveRole('add_another')}
-                className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
               >
                 Save and add another
               </button>
               <button
                 type="button"
                 onClick={() => saveRole('continue')}
-                className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm"
+                className="flex-1 sm:flex-none px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
               >
                 Save and continue editing
               </button>
